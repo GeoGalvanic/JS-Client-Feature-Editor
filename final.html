@@ -1,0 +1,53 @@
+{% extends "G863/lesson-template.html" %}
+{% load static %}
+
+{% block title %}Final Project{% endblock %}
+{% block head-ext %}
+  <link rel="stylesheet" type="text/css" href="{% static 'G863/final.css' %}" />
+  <link
+    rel="stylesheet"
+    href="https://js.arcgis.com/4.21/esri/themes/dark/main.css"
+  />
+{% endblock %}
+
+{% block page-title %}GEOG: 863 Final Project - Client Side Feature Editor{% endblock %}
+
+{% block lesson-content %}
+  <div id="viewDiv"></div>
+  <div class="esri-widget" id="connect-widget" style="padding: 1em;">
+    <div>Use the button below to connect to a local directory which will contain the contents of a "map project". For a new project it is recommended to use an empty directory, the appropriate structre will be automatically created. The connection is made using your browser's <a href="https://developer.mozilla.org/en-US/docs/Web/API/File_System_Access_API">File Access System API</a></div>
+    <div class="esri-button" id="connect-folder-button">Connect To Project Folder</div>
+  </div>
+  <div class="esri-widget" id="add-widget" style="padding: 1em;">
+    <div>ESRI JSON files  (in the format of <a href="https://developers.arcgis.com/documentation/common-data-types/overview-of-common-data-types.htm">ESRI REST API objects</a>) can be added once connected to a project folder. These files can be attained by converting from ESRI products, using <a href="https://developers.arcgis.com/javascript/latest/sample-code/playground/live/">the symbol playground</a>, or you can use the download widget to convert a hosted feature layer. A string representing the file name of a file already used in the project can be used in place of an object.</div>
+    <div class="esri-button esri-button-grouped" id ="add-layer-button">Add Layer</div>
+    <div class="esri-button esri-button-grouped" id ="add-feature-button">Add Feature</div>
+    <div class="esri-button esri-button-grouped" id ="add-renderer-button">Add Renderer</div>
+    <div class="esri-button esri-button-grouped" id ="add-symbol-button">Add Symbol</div>
+  </div>
+  <div class="esri-widget" id="layer-management-widget" style="padding: 1em;">
+    <div>This application uses a custom JSON specification to create feature layers. The tool below allows you to create a layer utilizing files that have been added to the project using the Add Files widget. For more details review <a href="{% static 'G863/Sample_Project.zip' %}">the sample project</a>.</div>
+    <div class="esri-button" id="create-layer-button">Create New Layer</div>
+  </div>
+  <div class="esri-widget" id="download-widget" style="padding: 1em;">
+    <div>Input the url to a hosted feature layer below. Clicking the button will allow you download the layer as a JSON file. You can add the file to the project by using the Add Files Widget.</div>
+    <input type="text" placeholder="URL for feature layer to download" class="esri-input" id="download-feature-input">
+    <div class="esri-button" id="download-layer-button">Download File</div>
+  </div>
+  <div class="esri-widget" id="create-layer-modal" style="display: none; max-width: max-content; padding: 1em; position: relative; margin: auto; top: 49%;">
+    <div style="max-width: min-content; margin-left:auto" class="esri-button" id="layer-modal-x">X</div>
+
+    <label for="layer-feature-select">Features:</label>
+    <select class="esri-input" id="layer-feature-select"></select>
+
+    <label for="layer-renderer-select">Renderer:</label>
+    <select class="esri-input" id="layer-renderer-select"></select>
+
+    <input type="checkbox" checked="true" class="esri-input" id="layer-edit-checkbox"></input>
+    <label for="layer-edit-checkbox">Enable Editing</label>
+
+    <div class="esri-button" id="save-layer-button">Save & Add</div>
+  </div>
+  <script src="{% static 'js/vendors.js' %}"></script>
+  <script src="{% static 'js/app.js' %}"></script>
+{% endblock %}
